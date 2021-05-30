@@ -2799,8 +2799,9 @@ inline std::string format(const Locale& loc, format_string<T...> fmt,
 }
 
 template <typename... T, size_t SIZE, typename Allocator>
-inline auto format_to(basic_memory_buffer<char, SIZE, Allocator>& buf,
-                      format_string<T...> fmt, T&&... args) -> appender {
+FMT_DEPRECATED auto format_to(basic_memory_buffer<char, SIZE, Allocator>& buf,
+                              format_string<T...> fmt, T&&... args)
+    -> appender {
   detail::vformat_to(buf, string_view(fmt), fmt::make_format_args(args...));
   return appender(buf);
 }
